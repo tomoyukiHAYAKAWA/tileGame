@@ -95,8 +95,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // 表示ループ
         for index in 0..<16 {
             // indexでポジションを選ぶ
-            let tileImage = value(forKey: "tileImage_\(imagePos[index])") as! UIImageView
-            tileImage.image = imageArray[index]
+            let tileImage = value(forKey: "tileImage_\(index)") as! UIImageView
+            tileImage.image = imageArray[imagePos[index]]
             currentPos.append(imagePos[index])
             // 各画像の現在地
         }
@@ -112,486 +112,562 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         for touch: UITouch in touches {
             let tag = touch.view!.tag
             switch tag {
-                case 0:
-                let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-                let tmpNum : Int = currentPos[tag]
+            case 0:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
                 let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
                 // 右
-                if currentPos[15] == tag+1 {
+                if currentPos[tag+1] == 15 {
                     let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-                    tile_c.image = tile_n.image!
-                    tile_n.image = tmpImage.image!
-                    currentPos[tag] = currentPos[tag+1]
-                    currentPos[tag+1] = tmpNum
-                    // 下
-                } else if currentPos[15] ==  {
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+1]
+                    currentPos[tag+1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                // 下
+                } else if currentPos[tag+4] == 15 {
                     let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
-                    tile_c.image = tile_n.image!
-                    tile_n.image = tmpImage.image!
-                    currentPos[tag] = currentPos[tag+4]
-                    currentPos[tag+4] = tmpNum
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+4]
+                    currentPos[tag+4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 1:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 右
+                if currentPos[tag+1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+1]
+                    currentPos[tag+1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                // 左
+                } else if currentPos[tag-1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-1]
+                    currentPos[tag-1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                // 下
+                } else if currentPos[tag+4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+4]
+                    currentPos[tag+4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+            
+            case 2:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 右
+                if currentPos[tag+1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+1]
+                    currentPos[tag+1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                // 左
+                } else if currentPos[tag-1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-1]
+                    currentPos[tag-1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    // 下
+                } else if currentPos[tag+4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+4]
+                    currentPos[tag+4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 3:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 左
+                if currentPos[tag-1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-1]
+                    currentPos[tag-1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                // 下
+                } else if currentPos[tag+4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+4]
+                    currentPos[tag+4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 4:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 右
+                if currentPos[tag+1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+1]
+                    currentPos[tag+1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                // 上
+                } else if currentPos[tag-4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-4]
+                    currentPos[tag-4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                
+                // 下
+                } else if currentPos[tag+4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+4]
+                    currentPos[tag+4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 5:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 右
+                if currentPos[tag+1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+1]
+                    currentPos[tag+1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                
+                // 左
+                } else if currentPos[tag-1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-1]
+                    currentPos[tag-1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 上
+                } else if currentPos[tag-4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-4]
+                    currentPos[tag-4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                
+                // 下
+                } else if currentPos[tag+4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+4]
+                    currentPos[tag+4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 6:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 右
+                if currentPos[tag+1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+1]
+                    currentPos[tag+1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 左
+                } else if currentPos[tag-1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-1]
+                    currentPos[tag-1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 上
+                } else if currentPos[tag-4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-4]
+                    currentPos[tag-4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 下
+                } else if currentPos[tag+4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+4]
+                    currentPos[tag+4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 7:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 右
+                if currentPos[tag-1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-1]
+                    currentPos[tag-1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                
+                // 上
+                } else if currentPos[tag-4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-4]
+                    currentPos[tag-4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 下
+                } else if currentPos[tag+4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+4]
+                    currentPos[tag+4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 8:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 右
+                if currentPos[tag+1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+1]
+                    currentPos[tag+1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 上
+                } else if currentPos[tag-4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-4]
+                    currentPos[tag-4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 下
+                } else if currentPos[tag+4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+4]
+                    currentPos[tag+4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 9:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 右
+                if currentPos[tag+1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+1]
+                    currentPos[tag+1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 左
+                } else if currentPos[tag-1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-1]
+                    currentPos[tag-1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 上
+                } else if currentPos[tag-4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-4]
+                    currentPos[tag-4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 下
+                } else if currentPos[tag+4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+4]
+                    currentPos[tag+4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 10:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 右
+                if currentPos[tag+1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+1]
+                    currentPos[tag+1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 左
+                } else if currentPos[tag-1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-1]
+                    currentPos[tag-1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 上
+                } else if currentPos[tag-4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-4]
+                    currentPos[tag-4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 下
+                } else if currentPos[tag+4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+4]
+                    currentPos[tag+4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 11:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 右
+                if currentPos[tag-1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-1]
+                    currentPos[tag-1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 上
+                } else if currentPos[tag-4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-4]
+                    currentPos[tag-4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 下
+                } else if currentPos[tag+4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+4]
+                    currentPos[tag+4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 12:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 右
+                if currentPos[tag+1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+1]
+                    currentPos[tag+1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 上
+                } else if currentPos[tag-4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-4]
+                    currentPos[tag-4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 13:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 右
+                if currentPos[tag+1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+1]
+                    currentPos[tag+1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 左
+                } else if currentPos[tag-1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-1]
+                    currentPos[tag-1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 上
+                } else if currentPos[tag-4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-4]
+                    currentPos[tag-4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 14:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 右
+                if currentPos[tag+1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag+1]
+                    currentPos[tag+1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 左
+                } else if currentPos[tag-1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-1]
+                    currentPos[tag-1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 上
+                } else if currentPos[tag-4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-4]
+                    currentPos[tag-4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                }
+                
+            case 15:
+                let tmpImage : UIImage!
+                let tmpNum : Int!
+                let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
+                // 左
+                if currentPos[tag-1] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-1]
+                    currentPos[tag-1] = currentPos[tag]
+                    currentPos[tag] = tmpNum
+                    
+                // 上
+                } else if currentPos[tag-4] == 15 {
+                    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
+                    tmpImage = tile_c.image
+                    tile_c.image = tile_n.image
+                    tile_n.image = tmpImage
+                    tmpNum = currentPos[tag-4]
+                    currentPos[tag-4] = currentPos[tag]
+                    currentPos[tag] = tmpNum
                 }
             default:
                 break
             }
+            print(currentPos)
         }
     }
-    
 }
-
-
-//case 0:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 右
-//if currentPos[tag+1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+1]
-//    currentPos[tag+1] = tmpNum
-//    // 下
-//} else if currentPos[tag+4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+4]
-//    currentPos[tag+4] = tmpNum
-//}
-//
-//case 1:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 右
-//if currentPos[tag+1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+1]
-//    currentPos[tag+1] = tmpNum
-//    // 左
-//} else if currentPos[tag-1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-1]
-//    currentPos[tag-1] = tmpNum
-//    // 下
-//} else if currentPos[tag+4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+4]
-//    currentPos[tag+4] = tmpNum
-//}
-//
-//case 2:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 右
-//if currentPos[tag+1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+1]
-//    currentPos[tag+1] = tmpNum
-//    // 左
-//} else if currentPos[tag-1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-1]
-//    currentPos[tag-1] = tmpNum
-//    // 下
-//} else if currentPos[tag+4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+4]
-//    currentPos[tag+4] = tmpNum
-//}
-//
-//case 3:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 左
-//if currentPos[tag-1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-1]
-//    currentPos[tag-1] = tmpNum
-//    // 下
-//} else if currentPos[tag+4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+4]
-//    currentPos[tag+4] = tmpNum
-//}
-//
-//case 4:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 上
-//if currentPos[tag-4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-4]
-//    currentPos[tag-4] = tmpNum
-//
-//    // 右
-//} else if currentPos[tag+1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+1]
-//    currentPos[tag+1] = tmpNum
-//    // 下
-//} else if currentPos[tag+4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+4]
-//    currentPos[tag+4] = tmpNum
-//}
-//
-//case 5:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 上
-//if currentPos[tag-4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-4]
-//    currentPos[tag-4] = tmpNum
-//
-//    // 右
-//} else if currentPos[tag+1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+1]
-//    currentPos[tag+1] = tmpNum
-//
-//    // 左
-//} else if currentPos[tag-1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-1]
-//    currentPos[tag-1] = tmpNum
-//
-//    // 下
-//} else if currentPos[tag+4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+4]
-//    currentPos[tag+4] = tmpNum
-//}
-//
-//case 6:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 上
-//if currentPos[tag-4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-4]
-//    currentPos[tag-4] = tmpNum
-//
-//    // 右
-//} else if currentPos[tag+1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+1]
-//    currentPos[tag+1] = tmpNum
-//
-//    // 左
-//} else if currentPos[tag-1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-1]
-//    currentPos[tag-1] = tmpNum
-//
-//    // 下
-//} else if currentPos[tag+4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+4]
-//    currentPos[tag+4] = tmpNum
-//}
-//
-//case 7:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 上
-//if currentPos[tag-4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-4]
-//    currentPos[tag-4] = tmpNum
-//
-//    // 左
-//} else if currentPos[tag-1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-1]
-//    currentPos[tag-1] = tmpNum
-//
-//    // 下
-//} else if currentPos[tag+4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+4]
-//    currentPos[tag+4] = tmpNum
-//}
-//
-//case 8:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 上
-//if currentPos[tag-4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-4]
-//    currentPos[tag-4] = tmpNum
-//
-//    // 右
-//} else if currentPos[tag+1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+1]
-//    currentPos[tag+1] = tmpNum
-//    // 下
-//} else if currentPos[tag+4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+4]
-//    currentPos[tag+4] = tmpNum
-//}
-//
-//case 9:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 上
-//if currentPos[tag-4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-4]
-//    currentPos[tag-4] = tmpNum
-//
-//    // 右
-//} else if currentPos[tag+1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+1]
-//    currentPos[tag+1] = tmpNum
-//
-//    // 左
-//} else if currentPos[tag-1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-1]
-//    currentPos[tag-1] = tmpNum
-//
-//    // 下
-//} else if currentPos[tag+4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+4]
-//    currentPos[tag+4] = tmpNum
-//}
-//
-//case 10:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 上
-//if currentPos[tag-4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-4]
-//    currentPos[tag-4] = tmpNum
-//
-//    // 右
-//} else if currentPos[tag+1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+1]
-//    currentPos[tag+1] = tmpNum
-//
-//    // 左
-//} else if currentPos[tag-1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-1]
-//    currentPos[tag-1] = tmpNum
-//
-//    // 下
-//} else if currentPos[tag+4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+4]
-//    currentPos[tag+4] = tmpNum
-//}
-//
-//case 11:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 上
-//if currentPos[tag-4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-4]
-//    currentPos[tag-4] = tmpNum
-//
-//    // 左
-//} else if currentPos[tag-1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-1]
-//    currentPos[tag-1] = tmpNum
-//
-//    // 下
-//} else if currentPos[tag+4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image
-//    currentPos[tag] = currentPos[tag+4]
-//    currentPos[tag+4] = tmpNum
-//}
-//
-//case 12:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 上
-//if currentPos[tag-4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-4]
-//    currentPos[tag-4] = tmpNum
-//
-//    // 右
-//} else if currentPos[tag+1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+1]
-//    currentPos[tag+1] = tmpNum
-//}
-//
-//case 13:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 上
-//if currentPos[tag-4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-4]
-//    currentPos[tag-4] = tmpNum
-//
-//    // 右
-//} else if currentPos[tag+1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+1]
-//    currentPos[tag+1] = tmpNum
-//
-//    // 左
-//} else if currentPos[tag-1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-1]
-//    currentPos[tag-1] = tmpNum
-//}
-//
-//case 14:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 上
-//if currentPos[tag-4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-4]
-//    currentPos[tag-4] = tmpNum
-//
-//    // 右
-//} else if currentPos[tag+1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+1]
-//    currentPos[tag+1] = tmpNum
-//
-//    // 左
-//} else if currentPos[tag-1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-1]
-//    currentPos[tag-1] = tmpNum
-//}
-//
-//case 15:
-//let tmpImage = value(forKey: "tileImage_\(tag)") as! UIImageView
-//let tmpNum : Int = currentPos[tag]
-//let tile_c = value(forKey: "tileImage_\(tag)") as! UIImageView
-//// 上
-//if currentPos[tag-4] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag-4]
-//    currentPos[tag-4] = tmpNum
-//
-//    // 左
-//} else if currentPos[tag-1] == 15 {
-//    let tile_n = value(forKey: "tileImage_\(tag+1)") as! UIImageView
-//    tile_c.image = tile_n.image!
-//    tile_n.image = tmpImage.image!
-//    currentPos[tag] = currentPos[tag+1]
-//    currentPos[tag+1] = tmpNum
-
