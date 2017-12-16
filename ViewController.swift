@@ -51,19 +51,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        // タッチイベントのためのタグ付け
+        
+        //--------------------------------------------------------------------------タッチイベントのためのタグ付け
         for index in 0..<16 {
             let tileImage = value(forKey: "tileImage_\(index)") as! UIImageView
             tileImage.isUserInteractionEnabled = true
             tileImage.tag = index
         }
+        //--------------------------------------------------------------------------
+        
         // 写真を選んだフラグ
         isChoosePhoto = false
-        
         // 難易度
         shuffleTimes = 32
-        
         // サウンドファイルのパスを生成
         let soundFilePath = Bundle.main.path(forResource: "slide", ofType: "mp3")!
         let sound:URL = URL(fileURLWithPath: soundFilePath)
@@ -82,7 +82,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // Dispose of any resources that can be recreated.
     }
     
-    // 写真を選ぶボタン
+    //--------------------------------------------------------------------------写真を選ぶボタン
     @IBAction func chooseBtn() {
         // カメラロールが利用できるかどうか
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
@@ -98,9 +98,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.present(pickerView, animated: true)
         }
     }
+    //--------------------------------------------------------------------------
+    
+    //--------------------------------------------------------------------------新規スタートボタン
+    @IBAction func newGameBtn() {
+        
+    }
+    //--------------------------------------------------------------------------
+    
+    //--------------------------------------------------------------------------やり直しボタン
+    @IBAction func restartBtn() {
+        for index in 0..<16 {
+            // indexでポジションを選ぶ
+            let tileImage = value(forKey: "tileImage_\(index)") as! UIImageView
+            tileImage.image = imageArray[imagePos[index]]
+        }
+    }
+    //--------------------------------------------------------------------------
 
-    // 写真を選んだ後に呼ばれる処理
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    //--------------------------------------------------------------------------写真を選んだ後に呼ばれる処理
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : Any]) {
         // 選択した写真を取得する
         let image = info[UIImagePickerControllerEditedImage] as? UIImage
         // 選ばれた画像の右下を塗りつぶしてchooseImageへ入れる
@@ -119,8 +137,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // 写真を選ぶビューを引っ込める
         self.dismiss(animated: true)
     }
+    //--------------------------------------------------------------------------
     
-    // タッチイベントの検出
+    //--------------------------------------------------------------------------タッチイベントの検出
+    //--------------------------------------------------------------------------タイルの移動
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         if isChoosePhoto == true {
@@ -689,8 +709,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
     }
+    //--------------------------------------------------------------------------
     
-    // タイルシャッフル
+    //--------------------------------------------------------------------------タイルシャッフル
     func shuffle() {
         // ポジションシャッフル
         for _ in 0...shuffleTimes {
@@ -709,7 +730,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             posiNum[index2] = tmp
             print(posiNum)
         }
-        
         // ポジション決めループ
         for i in 0..<16 {
             imagePos.append(posiNum[i])
@@ -723,8 +743,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             // 各画像の現在地
         }
     }
+    //--------------------------------------------------------------------------
     
-    // 完成したか判定
+    //--------------------------------------------------------------------------完成したか判定
     func judge() {
         // 正解数
         var trueCount : Int = 0
@@ -736,11 +757,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         // 全て正しい位置
         if trueCount == 16 {
-            print("クリア")
-        
-        // そうじゃない時
-        } else {
-            print("まだ")
+            // クリア通知
+            let alertController = UIAlertController(title: "Well Done",message: "You were completed this pazzle.", preferredStyle: UIAlertControllerStyle.alert)
+            // OKボタン
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (action: UIAlertAction) in
+                // OKがクリックされた時の処理
+                print("Hello")
+            }
+            // ボタンの追加
+            alertController.addAction(okAction)
+            // アラートの表示
+            present(alertController,animated: true,completion: nil)
         }
     }
+    //--------------------------------------------------------------------------
 }
