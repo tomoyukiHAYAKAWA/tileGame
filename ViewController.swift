@@ -39,9 +39,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var imageArray : [UIImage] = []
     var imagePos : [Int] = []
     var currentPos : [Int] = []
+    var posiNum : [Int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     
     // タッチフラグ
     var isChoosePhoto : Bool!
+    
+    var shuffleTimes : Int!
 
     // 再生する音源のインスタンス
     var audioPlayerInstance : AVAudioPlayer! = nil
@@ -57,7 +60,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         // 写真を選んだフラグ
         isChoosePhoto = false
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // 難易度
+        shuffleTimes = 32
+        
         // サウンドファイルのパスを生成
         let soundFilePath = Bundle.main.path(forResource: "slide", ofType: "mp3")!
         let sound:URL = URL(fileURLWithPath: soundFilePath)
@@ -103,22 +109,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.ansImage.image = chooseImage
         imageArray = openCV.splitImage(chooseImage) as! [UIImage];
         
-        var posiNum : [Int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-        // ポジション決めループ
-        for _ in 0..<16 {
-            // 0 ~ 15の乱数生成
-            let rand = Int(arc4random() % UInt32(posiNum.count))
-            imagePos.append(posiNum[rand])
-            posiNum.remove(at: rand)
-        }
-        // 表示ループ
-        for index in 0..<16 {
-            // indexでポジションを選ぶ
-            let tileImage = value(forKey: "tileImage_\(index)") as! UIImageView
-            tileImage.image = imageArray[imagePos[index]]
-            currentPos.append(imagePos[index])
-            // 各画像の現在地
-        }
+        // タイルシャッフル関数
+        shuffle()
+        
+        // 写真選択フラッグ
         isChoosePhoto = true
         print(currentPos)
         //print(imagePos)
@@ -696,6 +690,40 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    // タイルシャッフル
+    func shuffle() {
+        // ポジションシャッフル
+        for _ in 0...shuffleTimes {
+            let index1 = Int(arc4random_uniform(UInt32(UInt(posiNum.count))))
+            var index2 : Int!
+            while true {
+                index2 = Int(arc4random_uniform(UInt32(UInt(posiNum.count))))
+                if index1 != index2 {
+                    break
+                }
+            }
+            print(posiNum[index1])
+            print(posiNum[index2])
+            let tmp = posiNum[index1]
+            posiNum[index1] = posiNum[index2]
+            posiNum[index2] = tmp
+            print(posiNum)
+        }
+        
+        // ポジション決めループ
+        for i in 0..<16 {
+            imagePos.append(posiNum[i])
+        }
+        // 表示ループ
+        for index in 0..<16 {
+            // indexでポジションを選ぶ
+            let tileImage = value(forKey: "tileImage_\(index)") as! UIImageView
+            tileImage.image = imageArray[imagePos[index]]
+            currentPos.append(imagePos[index])
+            // 各画像の現在地
+        }
+    }
+    
     // 完成したか判定
     func judge() {
         // 正解数
@@ -715,5 +743,4 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             print("まだ")
         }
     }
-    
 }
