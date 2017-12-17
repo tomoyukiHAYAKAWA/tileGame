@@ -27,7 +27,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="chooce a picture"/>
                                 <connections>
-                                    <action selector="chooseBtn" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Rf-lA-nnV"/>
+                                    <action selector="chooseBtnWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UJi-KN-P18"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXA-c8-g9x">
@@ -35,18 +35,24 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="take a picture"/>
                                 <connections>
-                                    <action selector="chooseBtn" destination="BYZ-38-t0r" eventType="touchUpInside" id="dsX-uz-qLu"/>
+                                    <action selector="takePictureBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ljY-eg-XaD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aC7-kf-cDz">
                                 <rect key="frame" x="145" y="617" width="85" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="restartBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LYp-ik-rZ3"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mHE-ML-UN7">
                                 <rect key="frame" x="16" y="617" width="85" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="New Game"/>
+                                <connections>
+                                    <action selector="newGameBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dkp-LN-0Zs"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lfu-np-ADM">
                                 <rect key="frame" x="14" y="249" width="85" height="85"/>
@@ -118,6 +124,10 @@
                     </view>
                     <connections>
                         <outlet property="ansImage" destination="C6p-Kj-Vsq" id="Sb4-ge-2uW"/>
+                        <outlet property="chooseBtn" destination="VaD-nQ-JJs" id="h5n-c6-a2D"/>
+                        <outlet property="newGameBtn" destination="mHE-ML-UN7" id="XyX-sz-Nhi"/>
+                        <outlet property="restartBtn" destination="aC7-kf-cDz" id="wcv-21-tcF"/>
+                        <outlet property="takePictureBtn" destination="EXA-c8-g9x" id="45s-qh-QPV"/>
                         <outlet property="tileImage_0" destination="Lfu-np-ADM" id="RRz-23-tII"/>
                         <outlet property="tileImage_1" destination="yb3-mu-Pd5" id="XWr-la-PXV"/>
                         <outlet property="tileImage_10" destination="dIg-eo-D6O" id="G6G-bt-c1A"/>

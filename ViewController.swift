@@ -18,6 +18,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // 答えを表示するUIImageView
     @IBOutlet var ansImage : UIImageView!
     
+    // タイルのUIImageview
     @IBOutlet var tileImage_0 : UIImageView!
     @IBOutlet var tileImage_1 : UIImageView!
     @IBOutlet var tileImage_2 : UIImageView!
@@ -34,6 +35,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet var tileImage_13 : UIImageView!
     @IBOutlet var tileImage_14 : UIImageView!
     @IBOutlet var tileImage_15 : UIImageView!
+    
+    @IBOutlet weak var chooseBtn : UIButton!
+    @IBOutlet weak var takePictureBtn : UIButton!
+    @IBOutlet weak var newGameBtn: UIButton!
+    @IBOutlet weak var restartBtn: UIButton!
+    
     
     // 分割画像格納配列
     var imageArray : [UIImage] = []
@@ -75,6 +82,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         // バッファに保持していつでも再生できるようにする
         audioPlayerInstance.prepareToPlay()
+        
+        // ボタン無効化
+        restartBtn.isEnabled = true
+        newGameBtn.isEnabled = true
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,7 +95,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     //--------------------------------------------------------------------------写真を選ぶボタン
-    @IBAction func chooseBtn() {
+    @IBAction func chooseBtn(sender: Any) {
         // カメラロールが利用できるかどうか
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             // 写真を選ぶビュー
@@ -100,14 +112,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     //--------------------------------------------------------------------------
     
+    @IBAction func takePictureBtn(_ sender: Any) {
+    }
+    
+    
     //--------------------------------------------------------------------------新規スタートボタン
-    @IBAction func newGameBtn() {
+    @IBAction func newGameBtn(_ sender: Any) {
+        //アラートの表示
         
+        for index in 0..<16 {
+            // indexでポジションを選ぶ
+            let tileImage = value(forKey: "tileImage_\(index)") as! UIImageView
+            tileImage.image = UIImage(named: "")
+        }
+        ansImage.image = UIImage(named: "")
+        isChoosePhoto = false
     }
     //--------------------------------------------------------------------------
     
     //--------------------------------------------------------------------------やり直しボタン
-    @IBAction func restartBtn() {
+    @IBAction func restartBtn(_ sender: Any) {
+        // アラートの表示
+        
         for index in 0..<16 {
             // indexでポジションを選ぶ
             let tileImage = value(forKey: "tileImage_\(index)") as! UIImageView
@@ -132,6 +158,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         // 写真選択フラッグ
         isChoosePhoto = true
+        
+        // 写真撮影，選択ボタンの無効化
+        takePictureBtn.isEnabled = true
+        chooseBtn.isEnabled = true
+        
+        // リセット，新規ゲームボタンの有効化
+        restartBtn.isEnabled = false
+        newGameBtn.isEnabled = false
+        
         print(currentPos)
         //print(imagePos)
         // 写真を選ぶビューを引っ込める
@@ -758,11 +793,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // 全て正しい位置
         if trueCount == 16 {
             // クリア通知
-            let alertController = UIAlertController(title: "Well Done",message: "You were completed this pazzle.", preferredStyle: UIAlertControllerStyle.alert)
+            let alertController = UIAlertController(title: "Well Done", message: "You were completed this pazzle.", preferredStyle: UIAlertControllerStyle.alert)
             // OKボタン
             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (action: UIAlertAction) in
                 // OKがクリックされた時の処理
-                print("Hello")
+                
             }
             // ボタンの追加
             alertController.addAction(okAction)
