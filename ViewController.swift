@@ -70,7 +70,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // 写真を選んだフラグ
         isChoosePhoto = false
         // 難易度
-        shuffleTimes = 32
+        shuffleTimes = 8
         // サウンドファイルのパスを生成
         let soundFilePath = Bundle.main.path(forResource: "slide", ofType: "mp3")!
         let sound:URL = URL(fileURLWithPath: soundFilePath)
@@ -84,8 +84,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         audioPlayerInstance.prepareToPlay()
         
         // ボタン無効化
-        restartBtn.isEnabled = true
-        newGameBtn.isEnabled = true
+        restartBtn.isEnabled = false
+        newGameBtn.isEnabled = false
         
     }
 
@@ -113,35 +113,73 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //--------------------------------------------------------------------------
     
     @IBAction func takePictureBtn(_ sender: Any) {
+        
+        let sourceType:UIImagePickerControllerSourceType =
+            UIImagePickerControllerSourceType.camera
+        // カメラが利用可能かチェック
+        if UIImagePickerController.isSourceTypeAvailable(
+            UIImagePickerControllerSourceType.camera){
+            // インスタンスの作成
+            let pickerView = UIImagePickerController()
+            pickerView.sourceType = sourceType
+            pickerView.delegate = self
+            pickerView.allowsEditing = true
+            
+            self.present(pickerView, animated: true, completion: nil)
+            
+        }
     }
     
     
     //--------------------------------------------------------------------------新規スタートボタン
     @IBAction func newGameBtn(_ sender: Any) {
         //アラートの表示
-        
-        for index in 0..<16 {
-            // indexでポジションを選ぶ
-            let tileImage = value(forKey: "tileImage_\(index)") as! UIImageView
-            tileImage.image = UIImage(named: "")
+        let alertController = UIAlertController(title: "Attention!", message: "Do you want start new game?", preferredStyle: UIAlertControllerStyle.alert)
+        // OKボタン
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (action: UIAlertAction) in
+            // OKがクリックされた時の処理
+            self.reset()
         }
-        ansImage.image = UIImage(named: "")
-        isChoosePhoto = false
+        // CANCELボタンの実装
+        let cancelButton = UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.cancel, handler: nil)
+        // ボタンの追加
+        alertController.addAction(okAction)
+        alertController.addAction(cancelButton)
+        // アラートの表示
+        present(alertController,animated: true,completion: nil)
     }
     //--------------------------------------------------------------------------
     
     //--------------------------------------------------------------------------やり直しボタン
     @IBAction func restartBtn(_ sender: Any) {
         // アラートの表示
-        
-        for index in 0..<16 {
-            // indexでポジションを選ぶ
-            let tileImage = value(forKey: "tileImage_\(index)") as! UIImageView
-            tileImage.image = imageArray[imagePos[index]]
+        let alertController = UIAlertController(title: "Attention!", message: "Do you want reset this game?", preferredStyle: UIAlertControllerStyle.alert)
+        // OKボタン
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (action: UIAlertAction) in
+            // OKがクリックされた時の処理
+            for index in 0..<16 {
+                // indexでポジションを選ぶ
+                let tileImage = self.value(forKey: "tileImage_\(index)") as! UIImageView
+                tileImage.image = self.imageArray[self.imagePos[index]]
+            }
         }
+        // CANCELボタンの実装
+        let cancelButton = UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.cancel, handler: nil)
+        // ボタンの追加
+        alertController.addAction(okAction)
+        alertController.addAction(cancelButton)
+        // アラートの表示
+        present(alertController,animated: true,completion: nil)
     }
     //--------------------------------------------------------------------------
-
+    
+    
+    //--------------------------------------------------------------------------撮影がキャンセルされた時に呼ばれる
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    //--------------------------------------------------------------------------
+    
     //--------------------------------------------------------------------------写真を選んだ後に呼ばれる処理
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -160,12 +198,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         isChoosePhoto = true
         
         // 写真撮影，選択ボタンの無効化
-        takePictureBtn.isEnabled = true
-        chooseBtn.isEnabled = true
+        takePictureBtn.isEnabled = false
+        chooseBtn.isEnabled = false
         
         // リセット，新規ゲームボタンの有効化
-        restartBtn.isEnabled = false
-        newGameBtn.isEnabled = false
+        restartBtn.isEnabled = true
+        newGameBtn.isEnabled = true
         
         print(currentPos)
         //print(imagePos)
@@ -749,7 +787,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //--------------------------------------------------------------------------タイルシャッフル
     func shuffle() {
         // ポジションシャッフル
-        for _ in 0...shuffleTimes {
+        for _ in 0..<shuffleTimes {
             let index1 = Int(arc4random_uniform(UInt32(UInt(posiNum.count))))
             var index2 : Int!
             while true {
@@ -780,6 +818,32 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     //--------------------------------------------------------------------------
     
+    //--------------------------------------------------------------------------リセット処理
+    func reset() {
+        for index in 0..<16 {
+            // タイルの画像を全て消す
+            let tileImage = value(forKey: "tileImage_\(index)") as! UIImageView
+            tileImage.image = UIImage(named: "")
+            // ポジションの初期化
+            posiNum[index] = index
+        }
+        
+        imageArray.removeAll()
+        imagePos.removeAll()
+        currentPos.removeAll()
+        
+        // 答えの画像を消す
+        ansImage.image = UIImage(named: "")
+        // 写真選んだフラグを折る
+        isChoosePhoto = false
+        // 各ボタンの無効化有効化
+        newGameBtn.isEnabled = false
+        restartBtn.isEnabled = false
+        chooseBtn.isEnabled = true
+        takePictureBtn.isEnabled = true
+    }
+    //--------------------------------------------------------------------------
+    
     //--------------------------------------------------------------------------完成したか判定
     func judge() {
         // 正解数
@@ -797,10 +861,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             // OKボタン
             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (action: UIAlertAction) in
                 // OKがクリックされた時の処理
-                
+                self.reset()
             }
+            // CANCELボタンの実装
+            let cancelButton = UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.cancel, handler: nil)
             // ボタンの追加
             alertController.addAction(okAction)
+            alertController.addAction(cancelButton)
             // アラートの表示
             present(alertController,animated: true,completion: nil)
         }

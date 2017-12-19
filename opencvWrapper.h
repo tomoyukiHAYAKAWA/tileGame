@@ -11,7 +11,6 @@
 
 @interface opencvWrapper : NSObject
 //(返り値の型 *)関数名:(引数の型 *)引数名;
-- (UIImage *)toGray:(UIImage *)src;
 - (UIImage *)createModel:(UIImage *)src_img;
 - (NSArray *)splitImage:(UIImage *)src_img;
 

@@ -16,19 +16,6 @@
 
 @implementation opencvWrapper
 
--(UIImage *)toGray:(UIImage *)src {
-    // 変換用Mat
-    cv::Mat gray_img;
-    // imageをcv::Mat型へ変換
-    UIImageToMat(src, gray_img);
-    
-    cv::cvtColor(gray_img, gray_img, CV_BGR2GRAY);
-    
-    src = MatToUIImage(gray_img);
-    
-    return src;
-}
-
 - (UIImage *)createModel:(UIImage *)src_img {
     cv::Mat dst_img;
     // src_imgをMat型へ変換
@@ -69,7 +56,9 @@
         UIImage *image;
         image = MatToUIImage(split_img[i]);
         [tmpArray addObject:image];
+        split_img[i].release();
     }
+    
     return [NSArray arrayWithArray:tmpArray];
 }
 
