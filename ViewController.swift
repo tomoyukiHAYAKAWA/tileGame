@@ -70,7 +70,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // 写真を選んだフラグ
         isChoosePhoto = false
         // 難易度
-        shuffleTimes = 8
+        shuffleTimes = 100
         // サウンドファイルのパスを生成
         let soundFilePath = Bundle.main.path(forResource: "slide", ofType: "mp3")!
         let sound:URL = URL(fileURLWithPath: soundFilePath)
@@ -786,22 +786,30 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //--------------------------------------------------------------------------タイルシャッフル
     func shuffle() {
+        // 上下左右の場所配列
+        let udlr : [Int] = [4, -4, -1, 1]
+        var moveTo : Int!
         // ポジションシャッフル
-        for _ in 0..<shuffleTimes {
-            let index1 = Int(arc4random_uniform(UInt32(UInt(posiNum.count))))
-            var index2 : Int!
-            while true {
-                index2 = Int(arc4random_uniform(UInt32(UInt(posiNum.count))))
-                if index1 != index2 {
-                    break
+        for _ in 0...shuffleTimes {
+            // 配列を最後まで操作
+            for index in 0..<16 {
+                // 15のとき前後左右のどこかと入れ替える
+                if posiNum[index] == 15 {
+                    print(posiNum[index])
+                    while true {
+                        let moveArray = udlr[Int(arc4random_uniform(UInt32(UInt(udlr.count))))]
+                        moveTo = index - moveArray
+                        //print(moveTo)
+                        if 0 <= moveTo && moveTo < posiNum.count {
+                            break
+                        }
+                    }
+                    let tmp = posiNum[index]
+                    posiNum[index] = posiNum[moveTo]
+                    posiNum[moveTo] = tmp
+                    print(posiNum)
                 }
             }
-            print(posiNum[index1])
-            print(posiNum[index2])
-            let tmp = posiNum[index1]
-            posiNum[index1] = posiNum[index2]
-            posiNum[index2] = tmp
-            print(posiNum)
         }
         // ポジション決めループ
         for i in 0..<16 {
