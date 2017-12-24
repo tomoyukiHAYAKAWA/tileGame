@@ -70,7 +70,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // 写真を選んだフラグ
         isChoosePhoto = false
         // 難易度
-        shuffleTimes = 100
+        shuffleTimes = 200
         // サウンドファイルのパスを生成
         let soundFilePath = Bundle.main.path(forResource: "slide", ofType: "mp3")!
         let sound:URL = URL(fileURLWithPath: soundFilePath)
@@ -217,7 +217,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         if isChoosePhoto == true {
-            audioPlayerInstance.play()
             for touch: UITouch in touches {
                 let tag = touch.view!.tag
                 switch tag {
@@ -234,6 +233,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+1]
                         currentPos[tag+1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     // 下
                     } else if currentPos[tag+4] == 15 {
                         let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
@@ -243,6 +243,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+4]
                         currentPos[tag+4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 1:
@@ -258,6 +259,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+1]
                         currentPos[tag+1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     // 左
                     } else if currentPos[tag-1] == 15 {
                         let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
@@ -267,6 +269,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-1]
                         currentPos[tag-1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     // 下
                     } else if currentPos[tag+4] == 15 {
                         let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
@@ -276,6 +279,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+4]
                         currentPos[tag+4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                 
                 case 2:
@@ -291,6 +295,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+1]
                         currentPos[tag+1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     // 左
                     } else if currentPos[tag-1] == 15 {
                         let tile_n = value(forKey: "tileImage_\(tag-1)") as! UIImageView
@@ -300,6 +305,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-1]
                         currentPos[tag-1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         // 下
                     } else if currentPos[tag+4] == 15 {
                         let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
@@ -309,6 +315,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+4]
                         currentPos[tag+4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 3:
@@ -324,6 +331,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-1]
                         currentPos[tag-1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     // 下
                     } else if currentPos[tag+4] == 15 {
                         let tile_n = value(forKey: "tileImage_\(tag+4)") as! UIImageView
@@ -333,6 +341,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+4]
                         currentPos[tag+4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 4:
@@ -348,6 +357,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+1]
                         currentPos[tag+1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     // 上
                     } else if currentPos[tag-4] == 15 {
                         let tile_n = value(forKey: "tileImage_\(tag-4)") as! UIImageView
@@ -357,6 +367,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-4]
                         currentPos[tag-4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     
                     // 下
                     } else if currentPos[tag+4] == 15 {
@@ -367,6 +378,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+4]
                         currentPos[tag+4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 5:
@@ -382,6 +394,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+1]
                         currentPos[tag+1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     
                     // 左
                     } else if currentPos[tag-1] == 15 {
@@ -392,6 +405,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-1]
                         currentPos[tag-1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 上
                     } else if currentPos[tag-4] == 15 {
@@ -402,6 +416,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-4]
                         currentPos[tag-4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     
                     // 下
                     } else if currentPos[tag+4] == 15 {
@@ -412,6 +427,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+4]
                         currentPos[tag+4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 6:
@@ -427,6 +443,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+1]
                         currentPos[tag+1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 左
                     } else if currentPos[tag-1] == 15 {
@@ -437,6 +454,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-1]
                         currentPos[tag-1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 上
                     } else if currentPos[tag-4] == 15 {
@@ -447,6 +465,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-4]
                         currentPos[tag-4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 下
                     } else if currentPos[tag+4] == 15 {
@@ -457,6 +476,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+4]
                         currentPos[tag+4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 7:
@@ -472,6 +492,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-1]
                         currentPos[tag-1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     
                     // 上
                     } else if currentPos[tag-4] == 15 {
@@ -482,6 +503,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-4]
                         currentPos[tag-4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 下
                     } else if currentPos[tag+4] == 15 {
@@ -492,6 +514,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+4]
                         currentPos[tag+4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 8:
@@ -507,6 +530,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+1]
                         currentPos[tag+1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 上
                     } else if currentPos[tag-4] == 15 {
@@ -517,6 +541,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-4]
                         currentPos[tag-4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 下
                     } else if currentPos[tag+4] == 15 {
@@ -527,6 +552,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+4]
                         currentPos[tag+4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 9:
@@ -542,6 +568,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+1]
                         currentPos[tag+1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 左
                     } else if currentPos[tag-1] == 15 {
@@ -552,6 +579,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-1]
                         currentPos[tag-1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 上
                     } else if currentPos[tag-4] == 15 {
@@ -562,6 +590,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-4]
                         currentPos[tag-4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 下
                     } else if currentPos[tag+4] == 15 {
@@ -572,6 +601,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+4]
                         currentPos[tag+4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 10:
@@ -587,6 +617,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+1]
                         currentPos[tag+1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 左
                     } else if currentPos[tag-1] == 15 {
@@ -597,6 +628,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-1]
                         currentPos[tag-1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 上
                     } else if currentPos[tag-4] == 15 {
@@ -607,6 +639,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-4]
                         currentPos[tag-4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 下
                     } else if currentPos[tag+4] == 15 {
@@ -617,6 +650,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+4]
                         currentPos[tag+4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 11:
@@ -632,6 +666,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-1]
                         currentPos[tag-1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 上
                     } else if currentPos[tag-4] == 15 {
@@ -642,6 +677,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-4]
                         currentPos[tag-4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 下
                     } else if currentPos[tag+4] == 15 {
@@ -652,6 +688,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+4]
                         currentPos[tag+4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 12:
@@ -667,6 +704,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+1]
                         currentPos[tag+1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 上
                     } else if currentPos[tag-4] == 15 {
@@ -677,6 +715,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-4]
                         currentPos[tag-4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 13:
@@ -692,6 +731,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+1]
                         currentPos[tag+1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 左
                     } else if currentPos[tag-1] == 15 {
@@ -702,6 +742,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-1]
                         currentPos[tag-1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 上
                     } else if currentPos[tag-4] == 15 {
@@ -712,6 +753,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-4]
                         currentPos[tag-4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 14:
@@ -727,6 +769,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag+1]
                         currentPos[tag+1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 左
                     } else if currentPos[tag-1] == 15 {
@@ -737,6 +780,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-1]
                         currentPos[tag-1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 上
                     } else if currentPos[tag-4] == 15 {
@@ -747,6 +791,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-4]
                         currentPos[tag-4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                     
                 case 15:
@@ -762,6 +807,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-1]
                         currentPos[tag-1] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                         
                     // 上
                     } else if currentPos[tag-4] == 15 {
@@ -772,6 +818,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         tmpNum = currentPos[tag-4]
                         currentPos[tag-4] = currentPos[tag]
                         currentPos[tag] = tmpNum
+                        audioPlayerInstance.play()
                     }
                 default:
                     break
